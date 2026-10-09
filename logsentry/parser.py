@@ -60,16 +60,22 @@ def parse_logs(file_obj) -> pd.DataFrame:
     if 'timestamp' not in df.columns or 'event_id' not in df.columns:
         raise ValueError("Missing required columns: 'timestamp' and 'event_id' are mandatory.")
 
-    # Clean and parse data
     # Parse event_id to integers if possible, dropping invalid ones
+    # Use regex to extract the first number in case it contains text (e.g., '4624 Logon')
+    df['event_id'] = df['event_id'].astype(str).str.extract(r'(\d+)')[0]
     df['event_id'] = pd.to_numeric(df['event_id'], errors='coerce')
+    
+    original_len = len(df)
     
     # Drop rows where timestamp or event_id is entirely missing/invalid
     df = df.dropna(subset=['timestamp', 'event_id']).copy()
     
     # Parse timestamps
-    df['timestamp'] = pd.to_datetime(df['timestamp'], errors='coerce')
+    df['timestamp'] = pd.to_datetime(df['timestamp'], errors='coerce', format='mixed')
     df = df.dropna(subset=['timestamp']).copy()
+    
+    if df.empty and original_len > 0:
+        raise ValueError("All rows were dropped because the 'timestamp' or 'event_id' columns contained unparseable data.")
     
     # Optional columns initialization
     for col in ['account', 'source_ip', 'computer', 'description']:

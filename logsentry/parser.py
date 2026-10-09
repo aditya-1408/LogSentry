@@ -47,8 +47,19 @@ def extract_ip_from_message(message: str) -> str:
 def parse_logs(file_obj) -> pd.DataFrame:
     """Parse CSV logs from a file-like object and return a normalized DataFrame."""
     try:
-        # Read CSV with string type to avoid unexpected casting
-        df = pd.read_csv(file_obj, dtype=str)
+        # Read CSV with a wide range of column names to prevent shifting if data rows have more commas than headers
+        # This fixes a common issue with Windows Event Viewer CSV exports
+        df = pd.read_csv(file_obj, dtype=str, header=None, names=range(50))
+        
+        # Drop completely empty columns
+        df = df.dropna(axis=1, how='all')
+        
+        # Extract headers from first row
+        if len(df) > 0:
+            headers = df.iloc[0].tolist()
+            headers = [str(h) if pd.notna(h) else f'unnamed_{i}' for i, h in enumerate(headers)]
+            df.columns = headers
+            df = df[1:].reset_index(drop=True)
     except Exception as e:
         raise ValueError(f"Failed to read CSV: {e}")
         
@@ -57,6 +68,13 @@ def parse_logs(file_obj) -> pd.DataFrame:
 
     # Normalize columns
     df = normalize_columns(df)
+    
+    # If description is missing but there is an unnamed column at the end, use it as description
+    # Event viewer usually places the message text at the very end without a header
+    if 'description' not in df.columns:
+        unnamed_cols = [c for c in df.columns if str(c).startswith('unnamed_')]
+        if unnamed_cols:
+            df.rename(columns={unnamed_cols[-1]: 'description'}, inplace=True)
     
     # Verify required columns exist
     if 'timestamp' not in df.columns or 'event_id' not in df.columns:

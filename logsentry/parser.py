@@ -62,6 +62,10 @@ def parse_logs(file_obj) -> pd.DataFrame:
     if 'timestamp' not in df.columns or 'event_id' not in df.columns:
         raise ValueError("Missing required columns: 'timestamp' and 'event_id' are mandatory.")
 
+    # Capture raw samples for debugging
+    raw_ts_sample = df['timestamp'].dropna().head(1).tolist()
+    raw_id_sample = df['event_id'].dropna().head(1).tolist()
+    
     # Parse event_id to integers if possible, dropping invalid ones
     # Use regex to extract the first number in case it contains text (e.g., '4624 Logon')
     df['event_id'] = df['event_id'].astype(str).str.extract(r'(\d+)')[0]
@@ -77,7 +81,7 @@ def parse_logs(file_obj) -> pd.DataFrame:
     df = df.dropna(subset=['timestamp']).copy()
     
     if df.empty and original_len > 0:
-        raise ValueError("All rows were dropped because the 'timestamp' or 'event_id' columns contained unparseable data.")
+        raise ValueError(f"All rows dropped! Raw timestamp sample: {raw_ts_sample}, Raw event_id sample: {raw_id_sample}")
     
     # Optional columns initialization
     for col in ['account', 'source_ip', 'computer', 'description']:

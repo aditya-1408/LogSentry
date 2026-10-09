@@ -6,11 +6,13 @@ COLUMN_MAPPINGS = {
     "date and time": "timestamp",
     "timecreated": "timestamp",
     "event id": "event_id",
+    "id": "event_id",
     "targetusername": "account",
     "account name": "account",
     "ipaddress": "source_ip",
     "source network address": "source_ip",
     "computer name": "computer",
+    "machinename": "computer",
     "message": "description"
 }
 

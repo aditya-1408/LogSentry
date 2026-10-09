@@ -1,0 +1,3 @@
+"""
+LogSentry core package.
+"""

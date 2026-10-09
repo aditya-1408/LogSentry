@@ -1,0 +1,26 @@
+timestamp,event_id,account,source_ip,computer,description
+2023-10-27T08:00:00,4624,jdoe,192.168.1.50,WORKSTATION-01,Successful logon
+2023-10-27T08:05:00,4624,asmith,192.168.1.51,WORKSTATION-02,Successful logon
+2023-10-27T08:10:00,4625,jdoe,192.0.2.10,SRV-01,Failed logon (bad password)
+2023-10-27T08:10:15,4625,jdoe,192.0.2.10,SRV-01,Failed logon (bad password)
+2023-10-27T08:10:30,4625,jdoe,192.0.2.10,SRV-01,Failed logon (bad password)
+2023-10-27T08:10:45,4625,jdoe,192.0.2.10,SRV-01,Failed logon (bad password)
+2023-10-27T08:11:00,4625,jdoe,192.0.2.10,SRV-01,Failed logon (bad password)
+2023-10-27T08:12:00,4624,jdoe,192.0.2.10,SRV-01,Successful logon
+2023-10-27T08:15:00,4625,admin,198.51.100.20,SRV-02,Failed logon (bad password)
+2023-10-27T08:15:10,4625,administrator,198.51.100.20,SRV-02,Failed logon (bad password)
+2023-10-27T08:15:20,4625,root,198.51.100.20,SRV-02,Failed logon (bad password)
+2023-10-27T08:15:30,4625,sysadmin,198.51.100.20,SRV-02,Failed logon (bad password)
+2023-10-27T08:15:40,4625,test,198.51.100.20,SRV-02,Failed logon (bad password)
+2023-10-27T08:15:50,4625,guest,198.51.100.20,SRV-02,Failed logon (bad password)
+2023-10-27T08:20:00,4625,jsmith,203.0.113.5,WORKSTATION-03,Failed logon
+2023-10-27T08:20:05,4625,jsmith,203.0.113.5,WORKSTATION-03,Failed logon
+2023-10-27T08:25:00,4624,jsmith,203.0.113.5,WORKSTATION-03,Successful logon
+2023-10-27T08:30:00,4688,jdoe,192.168.1.50,WORKSTATION-01,A new process has been created
+2023-10-27T08:35:00,4625,unknown,,SRV-01,Failed logon missing IP
+2023-10-27T08:35:10,4625,unknown,,SRV-01,Failed logon missing IP
+2023-10-27T08:40:00,4624,,192.168.1.60,WORKSTATION-04,Successful logon missing account
+2023-10-27T08:45:00,4625,badmin,192.0.2.10,SRV-01,Failed logon (bad password)
+2023-10-27T08:50:00,4625,badmin,192.0.2.10,SRV-01,Failed logon (bad password)
+2023-10-27T08:55:00,4625,badmin,192.0.2.10,SRV-01,Failed logon (bad password)
+2023-10-27T09:00:00,4625,badmin,192.0.2.10,SRV-01,Failed logon (bad password)

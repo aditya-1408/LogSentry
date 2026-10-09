@@ -4,7 +4,8 @@ import plotly.express as px
 import io
 import time
 
-from logsentry.parser import parse_logs, validate_dataframe
+from logsentry.parser import parse_logs
+from logsentry.validation import validate_dataframe
 from logsentry.detection import detect_suspicious_activity
 from logsentry.reporting import generate_alerts_csv, generate_events_csv
 

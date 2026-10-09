@@ -64,7 +64,7 @@ def test_parse_logs_invalid_event_id():
     assert df.iloc[0]['event_id'] == 4625
 
 def test_parse_logs_empty():
-    with pytest.raises(ValueError, match="empty"):
+    with pytest.raises(ValueError, match="Failed to read CSV"):
         parse_logs(io.StringIO(""))
 
 def test_parse_logs_missing_required():

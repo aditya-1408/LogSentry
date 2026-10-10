@@ -1,6 +1,8 @@
 # LogSentry 🛡️
 **Windows Security Log Analyzer for Suspicious Activity**
 
+🚀 **[Live Demo: Click here to view the deployed application!](https://logsentry-fepxyyssfhfggqqb7fsckr.streamlit.app/)**
+
 ## 1. Project Overview
 LogSentry is a local, rule-based cybersecurity tool that analyzes Windows Security Event logs (exported as CSV) to identify potential authentication-based attacks, such as brute-forcing and unauthorized access. It features a polished dashboard for exploring security events and investigating alerts.
 
